@@ -36,10 +36,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Console\ConsolProgram.cs" />
+    <Compile Include="LConsole\ConsolProgram.cs" />
+    <Compile Include="Tracer\ThreadInf.cs" />
     <Compile Include="Tracer\TraceResult.cs" />
     <Compile Include="Tracer\TracerImpl.cs" />
     <Compile Include="Tracer\TracerInterface.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

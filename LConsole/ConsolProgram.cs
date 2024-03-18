@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Lab1.Console
+namespace Lab1.LConsole
 {
     class Program
     {
@@ -24,20 +24,32 @@ namespace Lab1.Console
             thread2.Join();
 
             var traceResult = tracer.getTraceResult();
-
+            foreach (var trace in traceResult)
+            {
+                Console.WriteLine(trace);
+            }
+           
         }
 
         private static void Func1()
         {
-
+            Console.WriteLine("Func1 start");
+            tracer.startTrace();
             Thread.Sleep(100);
             Func2();
-
+            Console.WriteLine("Func1 stop");
+            tracer.stopTrace();
         }
 
         private static void Func2()
         {
+            Console.WriteLine("Func2 start");
+            tracer.startTrace();
+
             Thread.Sleep(200);
+
+            Console.WriteLine("Func2 stop");
+            tracer.stopTrace();
         }
     }
 }
