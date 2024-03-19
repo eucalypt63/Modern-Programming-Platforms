@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+
 namespace Lab1.Tracer
 {
     public class ThreadInf
@@ -34,8 +35,23 @@ namespace Lab1.Tracer
         //Остановить таймер
         public void StopTimer()
         {
-            isActive = false;
-            stopwatch.Stop();
+            bool flag = true;
+            ThreadInf curNode = this;
+            foreach (ThreadInf child in curNode.TChilds)
+            {
+                if (child.isActive)
+                {
+                    flag = false;
+                    child.StopTimer();
+                    break;
+                }
+            }
+
+            if (flag)
+            {
+                isActive = false;
+                stopwatch.Stop();
+            }
         }
 
         //Получить результат таймера
@@ -44,6 +60,7 @@ namespace Lab1.Tracer
             return stopwatch.ElapsedMilliseconds;
         }
 
+        //Добавления узла при вызове функции внутри функции
         public void AddNode(ThreadInf node)
         {
             ThreadInf curNode = this;
@@ -62,6 +79,7 @@ namespace Lab1.Tracer
                 }
             }
             curNode.TChilds.Add(node);
+            node.TParent = curNode;
         }
 
         //Получить корневой узел

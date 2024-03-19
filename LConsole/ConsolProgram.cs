@@ -11,6 +11,7 @@ namespace Lab1.LConsole
     class Program
     {
         private static readonly TracerImpl tracer = new TracerImpl();
+        
 
         public static void Main()
         {
@@ -19,12 +20,16 @@ namespace Lab1.LConsole
 
             thread1.Start();
             thread2.Start();
-
+            
             thread1.Join();
             thread2.Join();
-
+            Func3(0);
             var traceResult = tracer.getTraceResult();
-            foreach (var trace in traceResult)
+
+
+            //--
+            var traceResultT = tracer.getTraceResultLing(); //!!
+            foreach (var trace in traceResultT)
             {
                 Console.WriteLine(trace);
             }
@@ -49,6 +54,20 @@ namespace Lab1.LConsole
             Thread.Sleep(200);
 
             Console.WriteLine("Func2 stop");
+            tracer.stopTrace();
+        }
+
+        //Доработать обработку рекурсивного вызвова
+        private static void Func3(int n)
+        {
+            Console.WriteLine("Func3 start");
+            tracer.startTrace();
+
+            Thread.Sleep(50);
+            if (n != 4)               
+                Func3(++n);
+            
+            Console.WriteLine("Func3 stop");
             tracer.stopTrace();
         }
     }

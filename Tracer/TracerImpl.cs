@@ -10,8 +10,8 @@ using System.Reflection;
 
 
 namespace Lab1.Tracer
-{ // : ITracer
-    public class TracerImpl 
+{ 
+    public class TracerImpl : ITracer
     {
         List<ThreadInf> threadList = new List<ThreadInf>();
 
@@ -27,16 +27,14 @@ namespace Lab1.Tracer
             var callingMethod = stackTrace.GetFrame(1).GetMethod(); 
             var callingClassName = callingMethod.DeclaringType.Name;
 
-            //--
+            //Создание класса обрабатываемого метода
             var newThread = new ThreadInf(threadId, callingMethodName, callingClassName);
-            
 
             var targetThread = threadList.FirstOrDefault(t => t.threadId == threadId);
             if (targetThread != null)
             {
                 targetThread.AddNode(newThread);
             }
-            //----
             threadList.Add(newThread);
             newThread.StartTimer();
         }
@@ -53,7 +51,7 @@ namespace Lab1.Tracer
             var callingMethod = stackTrace.GetFrame(1).GetMethod();
             var callingClassName = callingMethod.DeclaringType.Name;
 
-            //----
+            //Поиск обрабатываемого мтеода
             var targetThread = threadList.FirstOrDefault(t =>
               t.threadId == threadId &&
               t.methodName == callingMethodName &&
@@ -63,12 +61,10 @@ namespace Lab1.Tracer
             {
                 targetThread.StopTimer();
             }
-            //----
         }
 
-        //Получить результаты измерений
-        //Доработать
-        public List<long> getTraceResult()
+        //Получить результаты измерений (Временно)
+        public List<long> getTraceResultLing()
         {
             List<long> Time = new List<long>();
             foreach (ThreadInf thread in threadList)
@@ -76,6 +72,16 @@ namespace Lab1.Tracer
                 Time.Add(thread.ResultTime());
             }
                 return Time;
+        }
+
+        //Доработать клласс и создать функции для вывода результата
+        public TraceResult getTraceResult()
+        {
+            var trace = new TraceResult();
+            trace.getTraceResult(threadList);
+
+
+            return trace;
         }
     }
 }
