@@ -9,7 +9,6 @@ namespace Lab1.Tracer.serializer.ClassSerializer
 {
     public class xmlSerializer : ITraceSerializer
     {
-
         public string serialize(TraceResult traceResult)
         {
             string result = "";
@@ -24,6 +23,9 @@ namespace Lab1.Tracer.serializer.ClassSerializer
             return result;
         }
 
+        //PadRight(result.Length + 8); Добавление пробелов
+
+        //Добавление потока
         public string addThreads(TThread trace)
         {
             string result = "";
@@ -38,6 +40,7 @@ namespace Lab1.Tracer.serializer.ClassSerializer
             return result;
         }
 
+        //Добавление метода
         public string addMethod(ThreadInf method, int step)
         {
             string result = "";

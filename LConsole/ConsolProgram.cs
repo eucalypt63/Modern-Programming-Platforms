@@ -33,11 +33,17 @@ namespace Lab1.LConsole
             Func2();
             var traceResult = tracer.getTraceResult();
 
-            xmlSerializer xmlerializ = new xmlSerializer();
-            string message = xmlerializ.serialize(traceResult);
-            Console.WriteLine(message);
-            File.WriteAllText("trace.xml", message);
+            xmlSerializer xmlSerializ = new xmlSerializer();
+            string messageXml = xmlSerializ.serialize(traceResult);
+            Console.WriteLine(messageXml);
+            File.WriteAllText("trace.xml", messageXml);
 
+            Console.WriteLine("--------------------------------------");
+
+            jsonSerializer jsonSerializ = new jsonSerializer();
+            string messageJson = jsonSerializ.serialize(traceResult);
+            Console.WriteLine(messageJson);
+            File.WriteAllText("trace.json", messageJson);
         }
 
         private static void Func1()
