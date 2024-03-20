@@ -30,7 +30,7 @@ namespace Lab1.Tracer
             //Создание класса обрабатываемого метода
             var newThread = new ThreadInf(threadId, callingMethodName, callingClassName);
 
-            var targetThread = threadList.FirstOrDefault(t => t.threadId == threadId);
+            var targetThread = threadList.FirstOrDefault(t => t.threadId == threadId && t.GetHead().isActive == true);
             if (targetThread != null)
             {
                 targetThread.AddNode(newThread);
@@ -61,17 +61,6 @@ namespace Lab1.Tracer
             {
                 targetThread.StopTimer();
             }
-        }
-
-        //Получить результаты измерений (Временно)
-        public List<long> getTraceResultLing()
-        {
-            List<long> Time = new List<long>();
-            foreach (ThreadInf thread in threadList)
-            {
-                Time.Add(thread.ResultTime());
-            }
-                return Time;
         }
 
         //Доработать клласс и создать функции для вывода результата

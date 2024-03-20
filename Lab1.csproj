@@ -37,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LConsole\ConsolProgram.cs" />
+    <Compile Include="Tracer\serializer\ClassSerializer\jsonSerializer.cs" />
+    <Compile Include="Tracer\serializer\ClassSerializer\xmlSerializer.cs" />
+    <Compile Include="Tracer\serializer\ITraceSerializer.cs" />
     <Compile Include="Tracer\ThreadInf.cs" />
     <Compile Include="Tracer\TraceResult.cs" />
     <Compile Include="Tracer\TracerImpl.cs" />
@@ -44,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

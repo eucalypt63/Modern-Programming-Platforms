@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Serialization;
+using System.Diagnostics;
+using Lab1.Tracer.serializer.ClassSerializer;
 
 namespace Lab1.LConsole
 {
@@ -20,28 +24,30 @@ namespace Lab1.LConsole
 
             thread1.Start();
             thread2.Start();
-            
+
             thread1.Join();
             thread2.Join();
+
+
             Func3(0);
+            Func2();
             var traceResult = tracer.getTraceResult();
 
+            xmlSerializer xmlerializ = new xmlSerializer();
+            string message = xmlerializ.serialize(traceResult);
+            Console.WriteLine(message);
+            File.WriteAllText("trace.xml", message);
 
-            //--
-            var traceResultT = tracer.getTraceResultLing(); //!!
-            foreach (var trace in traceResultT)
-            {
-                Console.WriteLine(trace);
-            }
-           
         }
 
         private static void Func1()
         {
             Console.WriteLine("Func1 start");
             tracer.startTrace();
+
             Thread.Sleep(100);
             Func2();
+
             Console.WriteLine("Func1 stop");
             tracer.stopTrace();
         }
@@ -72,3 +78,4 @@ namespace Lab1.LConsole
         }
     }
 }
+

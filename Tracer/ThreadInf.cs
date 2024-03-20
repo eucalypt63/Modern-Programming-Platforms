@@ -10,10 +10,10 @@ namespace Lab1.Tracer
     public class ThreadInf
     {
         ThreadInf TParent = null;
-        List<ThreadInf> TChilds = new List<ThreadInf>();
-        public int threadId { get; }
-        public string methodName { get; }
-        public string className { get; }
+        public List<ThreadInf> TChilds = new List<ThreadInf>();
+        public int threadId { get; set; }
+        public string methodName { get; set; }
+        public string className { get; set; }
         public Stopwatch stopwatch = new Stopwatch();
 
         public bool isActive;
@@ -23,6 +23,11 @@ namespace Lab1.Tracer
             threadId = id;
             methodName = MethodName;
             className = ClassName;
+        }
+
+        public ThreadInf()
+        {
+           
         }
 
         //Запустить таймер
