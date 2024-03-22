@@ -34,20 +34,21 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LConsole\ConsolProgram.cs" />
-    <Compile Include="Tracer\serializer\ClassSerializer\jsonSerializer.cs" />
-    <Compile Include="Tracer\serializer\ClassSerializer\xmlSerializer.cs" />
-    <Compile Include="Tracer\serializer\ITraceSerializer.cs" />
-    <Compile Include="Tracer\ThreadInf.cs" />
-    <Compile Include="Tracer\TraceResult.cs" />
-    <Compile Include="Tracer\TracerImpl.cs" />
-    <Compile Include="Tracer\TracerInterface.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tracer\Tracer.csproj">
+      <Project>{402c94f8-b745-432f-baab-ecee95cfddab}</Project>
+      <Name>Tracer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

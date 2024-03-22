@@ -15,7 +15,6 @@ namespace Lab1.LConsole
     class Program
     {
         private static readonly TracerImpl tracer = new TracerImpl();
-        
 
         public static void Main()
         {
@@ -28,9 +27,9 @@ namespace Lab1.LConsole
             thread1.Join();
             thread2.Join();
 
-
-            Func3(0);
-            Func2();
+            Func3(4);
+            Func1();
+            Func1();
             var traceResult = tracer.getTraceResult();
 
             xmlSerializer xmlSerializ = new xmlSerializer();
@@ -38,7 +37,7 @@ namespace Lab1.LConsole
             Console.WriteLine(messageXml);
             File.WriteAllText("trace.xml", messageXml);
 
-            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("\n--------------------------------------\n");
 
             jsonSerializer jsonSerializ = new jsonSerializer();
             string messageJson = jsonSerializ.serialize(traceResult);
@@ -48,38 +47,34 @@ namespace Lab1.LConsole
 
         private static void Func1()
         {
-            Console.WriteLine("Func1 start");
             tracer.startTrace();
 
             Thread.Sleep(100);
             Func2();
 
-            Console.WriteLine("Func1 stop");
             tracer.stopTrace();
         }
 
         private static void Func2()
         {
-            Console.WriteLine("Func2 start");
             tracer.startTrace();
 
             Thread.Sleep(200);
 
-            Console.WriteLine("Func2 stop");
             tracer.stopTrace();
         }
 
-        //Доработать обработку рекурсивного вызвова
         private static void Func3(int n)
         {
-            Console.WriteLine("Func3 start");
             tracer.startTrace();
 
             Thread.Sleep(50);
-            if (n != 4)               
-                Func3(++n);
-            
-            Console.WriteLine("Func3 stop");
+            if (n == 1)
+                Func1();
+
+            if (n != 0)               
+                Func3(--n);
+
             tracer.stopTrace();
         }
     }
